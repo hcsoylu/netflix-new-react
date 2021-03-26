@@ -9,14 +9,14 @@ export default class SavingTheMovies extends Component{
 
 }*/
 
-componentDidMount = async () =>{
+/*componentDidMount = async () =>{
   const response = await fetch(
   `http://www.omdbapi.com/?i=tt3896198&apikey=c94830bb`,
   )
       new Headers().append("Cookie", "__cfduid=d720d34afbe183ade8007c005741989d01616757371");
 
      }
-     const data = await response.Json() 
+    {/* const data = await response.Json() */
 
 
 }
