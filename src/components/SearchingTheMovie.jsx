@@ -1,12 +1,33 @@
 import React, {Component} from 'react'
-import {} from 'react-bootstrap'
+import {Container, Form, FormControl,Row,Col} from 'react-bootstrap'
+import DisplayingTheMovies from "./DisplayingTheMovies"
 
 export default class SearchingTheMovie extends Component{
-  state = {query : ""}
+  state = {
+    array: [],
+  }
+  componentDidMount = async () =>{   
+  try{
+  const response = fetch("http://www.omdbapi.com/?apikey=c94830bb&s=harry%20potter")
+
+   if (response.ok) {
+        console.log('response ok');
+        const data = await response.json();
+        console.log(data);
+        this.setState({
+           array: data 
+          });
+        console.log(this.state.array);
+      } else {
+        console.log('response not ok');
+      }
+}catch(error){
+ console.log('error', error)
+}
+}
+
   filtering = (e) =>{this.setState({query: e.target.value})}
   render(){
-   const {Category} = this.props
-
     return (
       <Container>
       <Form inline>
@@ -21,18 +42,17 @@ export default class SearchingTheMovie extends Component{
     <Row>
       
       {
-        Category.every((uniqueBook) => !uniqueBook.title.toLowerCase().includes(this.state.query.toLowerCase()))
+        this.state.array.every((uniqueMovie) => !uniqueMovie.Title.toLowerCase().includes(this.state.query.toLowerCase()))
          ? "None" 
          : 
-        Category
-        .filter((uniqueBook) => uniqueBook.title.toLowerCase().includes(this.state.query.toLowerCase()))
+         this.state.array
+        .filter((uniqueMovie) => uniqueMovie.Title.toLowerCase().includes(this.state.query.toLowerCase()))
         .map((item) => ( 
-          <Col xs={10} md={4} lg={3} key={item.asin} className=''>
-            <DisplayBook books={item} />
+          <Col xs={10} md={4} lg={3} key={item.imdbID} className=''>
+            <DisplayingTheMovies movies={item} />
           </Col>
         ))
       }  
-    
     </Row>
     </Container>
     )}

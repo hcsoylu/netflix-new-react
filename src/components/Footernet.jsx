@@ -5,46 +5,34 @@ function Footernet() {
   return (
     <div className="container-fluid" style={{ backgroundColor: "black" }}>
       <footer className="container" style={{ color: "gray" }}>
-        <div className="row d-flex">
-          <div className="col">
-            <ul>
-              <li>Audio/Subtitles</li>
-              <li>Media Centre</li>
-              <li>Privacy</li>
-              <li>Contact Us</li>
-            </ul>
-          </div>
-
-          <div className="col">
-            <ul>
-              <li>Audio Description</li>
-              <li>Investor Relations</li>
-              <li>Legal Notices</li>
-              <li>Audio Description</li>
-            </ul>
-          </div>
-
-          <div className="col">
-            <ul>
-              <li>Service Code</li>
-              <li>Investor Relations</li>
-              <li>Audio Description</li>
-              <li>Contact Us</li>
-            </ul>
-          </div>
-
-          <div className="col">
-            <ul>
-              <li>Legal Notices</li>
-              <li>Investor Relations</li>
-              <li>Contact Us</li>
-              <li>Legal Notices</li>
-            </ul>
-          </div>
+      <section class="link">
+        <div class="logos">
+          <a href="#"><i class="fab fa-facebook-square fa-2x logo"></i></a>
+          <a href="#"><i class="fab fa-instagram fa-2x logo"></i></a>
+          <a href="#"><i class="fab fa-twitter fa-2x logo"></i></a>
+          <a href="#"><i class="fab fa-youtube fa-2x logo"></i></a>
         </div>
+        <div class="sub-links">
+          <ul>
+            <li><a href="#">Audio and Subtitles</a></li>
+            <li><a href="#">Audio Description</a></li>
+            <li><a href="#">Help Center</a></li>
+            <li><a href="#">Gift Cards</a></li>
+            <li><a href="#">Media Center</a></li>
+            <li><a href="#">Investor Relations</a></li>
+            <li><a href="#">Jobs</a></li>
+            <li><a href="#">Terms of Use</a></li>
+            <li><a href="#">Privacy</a></li>
+            <li><a href="#">Legal Notices</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="backofficeNetflix.html">Back Office</a></li>
+          </ul>
+        </div>
+      </section>
       </footer>
     </div>
   );
 }
 
 export default Footernet;
+

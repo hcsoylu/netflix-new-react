@@ -1,14 +1,13 @@
 import React, {Component} from 'react'
-import {} from 'react-bootstrap'
 
 export default class DisplayingTheMovies extends Component{
 
    render(){
-     const { movies: {poster, title}} = this.props;
+     const { comment: Poster} = this.props;
 
       return (
               <div class="col-2">
-                <img class="img-fluid" src={poster} alt=""></img>
+                <img class="img-fluid" src={Poster} alt=""></img>
               </div>
       )
   }

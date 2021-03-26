@@ -1,22 +1,25 @@
-import React, {Component} from 'react'
-import {} from 'react-bootstrap'
-
+import {Component} from 'react'
+import {Container, Row, ListGroup,SingleComment} from 'react-bootstrap'
+import DisplayingTheMovies from "./DisplayingTheMovies"
 export default class SavingTheMovies extends Component{
- /* state = {
-    comment: "",
-    rate: 1,
-    elementId: ""
+  state = {
+    array: [],
+  }
+componentDidMount = async () =>{
 
-}*/
-
-/*componentDidMount = async () =>{
-  const response = await fetch(
-  `http://www.omdbapi.com/?i=tt3896198&apikey=c94830bb`,
-  )
-      new Headers().append("Cookie", "__cfduid=d720d34afbe183ade8007c005741989d01616757371");
-
-     }
-    {/* const data = await response.Json() */
-
-
+}
+render() {
+  return (
+    <Container fluid>
+      <h5>Comment Area</h5>
+      <Row className='justify-content-center'>
+        <ListGroup>
+          {this.state.array.map((mov) => (
+            <DisplayingTheMovies comment={mov} key={mov.imdbID} />
+          ))}
+        </ListGroup>
+      </Row>
+    </Container>
+  );
+}
 }
