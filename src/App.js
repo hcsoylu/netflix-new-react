@@ -11,22 +11,8 @@ function App() {
     <div className="App">
       <Navnet />
       <Container fluid>
-        <Row>
-          <Col>
-      <SearchingTheMovie
-      title="Harry Potter"
-      baseUrl={"http://www.omdbapi.com/?apikey=c94830bb&s=harry+potter"}
-      />
-      <SearchingTheMovie queries={['Spiderman','Taken','Pirates']}  title="Pirates of the Caribbean" baseUrl={"http://www.omdbapi.com/?apikey=c94830bb&s=pirates+of+the+caribbean"} />
-   
-          
-          </Col>
-        </Row>
-        <Row>
-          
-        </Row>
+      <SearchingTheMovie queries={['Taken','Pirates', 'Harry', 'Avenger', 'Iron Man', 'Pantera']}/>       
       </Container>
-      
       <Footernet />
     </div>
   );

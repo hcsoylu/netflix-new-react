@@ -1,24 +1,22 @@
-import axios from 'axios'
+
 import React, {Component} from 'react'
 import "../SearchingTheMovie.css"
-import {Row,Col} from "react-bootstrap"
-class SearchingTheMovie extends Component{
+import {Row,Col,Form,FormControl, Container, Carousel} from "react-bootstrap"
+import ImgRender from './ImgRender'
 
+class SearchingTheMovie extends Component{
 
   constructor(props){
     super(props)
     this.state ={
-      movies: []
+      movies: [],
+      query: "",
     }
     
   }
-  
-
-  
- 
 componentDidMount=async()=>{
- const allMovies =await  this.fetchMovies()
- console.log(allMovies)
+ await this.fetchMovies()
+ console.log(this.state.movies);
  
 }
    fetchMovies = async ()=>{
@@ -46,39 +44,54 @@ componentDidMount=async()=>{
     }
     
   }
+
+  filtering = (e) => this.setState({query: e.target.value})
+   
+  
+
   render(){
+    console.log(this.state.query);
     return(
+      <div>
+          <Form inline>
+          <FormControl
+          type="text"
+          placeholder="Search"
+          className="mr-sm-2"
+          onChange={this.filtering}
+          value={this.state.query}
+          />
+        </Form>
+      
       <div className="container-fluid">
-       {
-          this.state.movies.map(movie => {
-            return  <>
-             <h1 className="mt-5 mb-5">{movie.title}</h1>
-            
-            <Row>
-             
-              {
-                movie.data.map((singleMovie)=>{
-                    return <Col>
-                     <img
-                    className="row_poster"
-                    onError={(e)=>{
-                      e.currentTarget.parentElement.remove()
-                    }}
-                    style={{height:200,objectFit:"cover"}}
-                    key={singleMovie.imdbID}
-                    src={singleMovie.Poster}
-                    alt={singleMovie.Title}
-                    />
-                    </Col>
-                })
+
+          {this.state.movies.map((movie) =>
+          <>
+          <Row>
+            <Col lg={12}>
+           <h1 className="mt-5 mb-5">{movie.title}</h1>
+            </Col>
+          </Row>
+        <Row>
+               {            
+              
+                movie.data.every((singleMovie)=>!singleMovie.Title.toLowerCase().includes(this.state.query.toLowerCase()))
+                ? "None"
+                :
+                movie.data
+                .filter((singleMovie)=>singleMovie.Title.toLowerCase().includes(this.state.query.toLowerCase()))
+                .map((singleMovie) => (
+                  <ImgRender  key={singleMovie.imdbID} className='row_posters' movie={singleMovie} />
+                ) )
               }
-            </Row></>
-          })
-        }
-       
+            </Row>
+            </>
+            )
+            }
+        </div>
       </div>
     )
-}
+  }
 }
   export default SearchingTheMovie
   
