@@ -2,7 +2,6 @@
 import React, {Component} from 'react'
 import "../SearchingTheMovie.css"
 import {Row,Col,Form,FormControl, Container, Carousel} from "react-bootstrap"
-import ImgRender from './ImgRender'
 
 class SearchingTheMovie extends Component{
 
@@ -12,7 +11,7 @@ class SearchingTheMovie extends Component{
       movies: [],
       query: "",
     }
-    
+
   }
 componentDidMount=async()=>{
  await this.fetchMovies()
@@ -45,7 +44,22 @@ componentDidMount=async()=>{
     
   }
 
-  filtering = (e) => this.setState({query: e.target.value})
+  filtering =async (e) => {
+    const query = e.currentTarget.value;
+      if(query.length){
+        if(e.key==='Enter'){
+          const result = await this.fetchMovie(query)
+          const movies = [{title:query,data:result}]
+          //console.log(movies)
+          this.setState({movies})
+  }
+      }
+
+      else{
+        this.fetchMovies()
+      }
+  }
+    
    
   
 
@@ -53,15 +67,13 @@ componentDidMount=async()=>{
     console.log(this.state.query);
     return(
       <div>
-          <Form inline>
-          <FormControl
+         <FormControl
           type="text"
           placeholder="Search"
           className="mr-sm-2"
-          onChange={this.filtering}
-          value={this.state.query}
+          onKeyDown={this.filtering}
+           
           />
-        </Form>
       
       <div className="container-fluid">
 
@@ -73,15 +85,20 @@ componentDidMount=async()=>{
             </Col>
           </Row>
         <Row>
-               {            
-              
-                movie.data.every((singleMovie)=>!singleMovie.Title.toLowerCase().includes(this.state.query.toLowerCase()))
-                ? "None"
-                :
+               {
                 movie.data
                 .filter((singleMovie)=>singleMovie.Title.toLowerCase().includes(this.state.query.toLowerCase()))
+                .slice(0, 6)
                 .map((singleMovie) => (
-                  <ImgRender  key={singleMovie.imdbID} className='row_posters' movie={singleMovie} />
+                  <Col lg={2}>
+                  <img
+                  onClick={() => this.props.history.push('/details/' + singleMovie.imdbID)} 
+                  className="row_poster img-fluid"
+                  key={singleMovie.imdbID}
+                  src={singleMovie.Poster}
+                  alt={singleMovie.Title}
+                  />
+                </Col>
                 ) )
               }
             </Row>
