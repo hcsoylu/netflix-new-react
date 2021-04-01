@@ -15,7 +15,6 @@ class SearchingTheMovie extends Component{
   }
 componentDidMount=async()=>{
  await this.fetchMovies()
- console.log(this.state.movies);
  
 }
    fetchMovies = async ()=>{

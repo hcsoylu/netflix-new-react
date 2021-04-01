@@ -16,7 +16,8 @@ function App() {
       <Navnet />
       <Container fluid>
       <Route path="/" exact render={(routerProps) => <Home {...routerProps} queries={['Taken','Pirates', 'Harry', 'Avenger', 'Iron Man', 'Pantera', 'Batman']} />} />
-      <Route path="/details/:movieId" component={ShowDetail}/>      
+      <Route exact path="/details/:movieID" render={(routerProps) => <ShowDetail {...routerProps} />}
+      />      
       </Container>
       <Footernet />
       </Router>
